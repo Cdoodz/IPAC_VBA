@@ -1,0 +1,24 @@
+Sub CSVHCW()
+
+Dim s2 As Worksheet
+Set s2 = ThisWorkbook.Sheets("covid19hcw")
+
+'******covid19hcw********
+'Copy sheet "covid19hcw"
+s2.Range("A1:S2").Copy
+
+'create a new workbook for sheet "covid19hcw"
+Workbooks.Add
+
+'paste sheet "covid19hcw" into new workbook
+ActiveSheet.Range("A1").PasteSpecial (xlPasteValues)
+
+ActiveSheet.Range("B2:V2").Replace what:="0", Replacement:="", _
+    LookAt:=xlPart, SearchOrder:=xlByRows, MatchCase:=False, _
+    SearchFormat:=False, ReplaceFormat:=False
+
+ActiveSheet.Range("A2").NumberFormat = "mm/dd/yyyy"
+
+'save copy as
+ActiveWorkbook.SaveAs Filename:=s2.Range("c12") & ".csv", FileFormat:=xlCSV
+End Sub
