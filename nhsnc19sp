@@ -1,0 +1,38 @@
+Sub CSVSP()
+
+Dim s3 As Worksheet
+Set s3 = ThisWorkbook.Sheets("covid19supp")
+
+'******covid19supp********
+'Copy sheet "covid19supp"
+s3.Range("A1:V2").Copy
+
+'create a new workbook for sheet "covid19supp"
+Workbooks.Add
+
+'paste sheet "covid19supp" into new workbook
+ActiveSheet.Range("A1").PasteSpecial (xlPasteValues)
+
+ActiveSheet.Range("B2:V2").Replace what:="0", Replacement:="0 days", _
+    LookAt:=xlPart, SearchOrder:=xlByRows, MatchCase:=False, _
+    SearchFormat:=False, ReplaceFormat:=False
+    
+ActiveSheet.Cells.Replace what:="1-3", Replacement:="1-3 days", _
+    LookAt:=xlPart, SearchOrder:=xlByRows, MatchCase:=False, _
+    SearchFormat:=False, ReplaceFormat:=False
+    
+ActiveSheet.Cells.Replace what:="4-14", Replacement:="4-14 days", _
+    LookAt:=xlPart, SearchOrder:=xlByRows, MatchCase:=False, _
+    SearchFormat:=False, ReplaceFormat:=False
+
+ActiveSheet.Cells.Replace what:="15+", Replacement:=">=15 days", _
+    LookAt:=xlPart, SearchOrder:=xlByRows, MatchCase:=False, _
+    SearchFormat:=False, ReplaceFormat:=False
+    
+ActiveSheet.Range("A2").NumberFormat = "mm/dd/yyyy"
+
+'save copy as
+ActiveWorkbook.SaveAs Filename:=s3.Range("c12") & ".csv", FileFormat:=xlCSV
+
+
+End Sub
