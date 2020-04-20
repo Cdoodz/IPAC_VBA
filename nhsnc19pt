@@ -1,0 +1,22 @@
+Sub CSVPI()
+
+Dim s1 As Worksheet
+Set s1 = ThisWorkbook.Sheets("covid19patient")
+
+'******covid19patient********
+
+'Copy sheet "covid19patient"
+s1.Range("A1:N2").Copy
+
+'create a new workbook for sheet "covid19patient"
+Workbooks.Add
+
+'paste sheet "covid19patient" into new workbook
+ActiveSheet.Range("A1").PasteSpecial (xlPasteValues)
+
+ActiveSheet.Range("A2").NumberFormat = "mm/dd/yyyy"
+
+'save copy as
+ActiveWorkbook.SaveAs Filename:=s1.Range("c12") & ".csv", FileFormat:=xlCSV
+
+End Sub
