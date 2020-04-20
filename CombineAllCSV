@@ -1,0 +1,20 @@
+Sub NHSNOneStepCSVConvert()
+
+'Optimize Macro Speed
+Application.ScreenUpdating = False
+Application.EnableEvents = False
+Application.Calculation = xlCalculationManual
+Application.DisplayAlerts = False
+
+Call CSVPI
+Call CSVHCW
+Call CSVSP
+
+'Turn back on screen updating etc
+Application.ScreenUpdating = True
+Application.EnableEvents = True
+Application.Calculation = xlCalculationAutomatic
+Application.DisplayAlerts = True
+
+
+End Sub
